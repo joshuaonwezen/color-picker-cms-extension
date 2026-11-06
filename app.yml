@@ -1,0 +1,31 @@
+meta:
+  app_id: cms_color_picker
+  display_name: Color picker
+  version: 0.0.1-dev.0
+  vendor: optimizely
+  summary: A color swatch beside long-string fields that writes a #rrggbb value (probe).
+  support_url: https://www.optimizely.com
+  contact_email: joshua.onwezen@optimizely.com
+  categories:
+    - Testing & Utilities
+  availability:
+    - all
+
+runtime: node22-cms-ext
+
+functions:
+  cms_extension:
+    entry_point: CmsUiExtension
+    description: Logs what the CMS passes for each field the editor mounts on.
+    accepts: cms_ui_extension
+
+ui_extensions:
+  property-editor:
+    # PROBE: long strings are the only kind the CMS mounts property editors on, and the
+    # Product picker claims them too. This shows which editor the CMS mounts when two
+    # apps claim the same kind, and logs what it passes per field.
+    - name: color-picker
+      entry_point: ColorPicker
+      display_name: Color picker
+      metadata:
+        property_type: string
