@@ -3,7 +3,7 @@ meta:
   display_name: Color picker
   version: 0.0.1-dev.1
   vendor: optimizely
-  summary: A color swatch beside long-string fields that writes a #rrggbb value (probe).
+  summary: A color field for CMS properties - a swatch, a hex input and your brand palette, with a text contrast check.
   support_url: https://www.optimizely.com
   contact_email: joshua.onwezen@optimizely.com
   categories:
@@ -16,14 +16,13 @@ runtime: node22-cms-ext
 functions:
   cms_extension:
     entry_point: CmsUiExtension
-    description: Logs what the CMS passes for each field the editor mounts on.
+    description: Serves the brand palette from the app settings.
     accepts: cms_ui_extension
 
 ui_extensions:
   property-editor:
-    # PROBE: long strings are the only kind the CMS mounts property editors on, and the
-    # Product picker claims them too. This shows which editor the CMS mounts when two
-    # apps claim the same kind, and logs what it passes per field.
+    # Offered for long strings (string, no format). The CMS mounts it only where an admin
+    # picks it: content type -> property -> User Interface -> Editor: Color picker.
     - name: color-picker
       entry_point: ColorPicker
       display_name: Color picker

@@ -1,34 +1,28 @@
 import * as App from '@zaiusinc/app-sdk';
 import {logger} from '@zaiusinc/app-sdk';
 
-import type {ActionParams, Envelope} from '../../shared/types';
-
-// PROBE: the CMS mounts property editors on every long string and doesn't say which
-// field. Log what it does pass (PropertyState.settings) per field, at WARN so it shows
-// in `ocp app logs`. Capped per container so a page full of fields can't flood the log.
-const MAX_LOGS_PER_CONTAINER = 50;
-let logged = 0;
+import type {Envelope} from '../../shared/types';
+import {loadPalette} from '../lib/settings';
 
 function ok<T>(result: T): Envelope<T> {
   return {ok: true, result};
 }
 
+function fail(error: string): Envelope<never> {
+  return {ok: false, error};
+}
+
 export class CmsUiExtension extends App.Function {
   public async perform(): Promise<App.Response> {
-    // Everything inside the try: a throw that escapes perform() breaks the field.
+    // Everything inside the try: a throw that escapes perform() reaches the editor as an
+    // empty "[ExtensionService] Failed to invoke function:".
     try {
-      const body = (this.request.bodyJSON ?? {}) as {action?: unknown; params?: Partial<ActionParams['probe']>};
-      if (body.action !== 'probe') return new App.Response(400, {ok: false, error: 'unknown_action'});
-      if (logged >= MAX_LOGS_PER_CONTAINER) return new App.Response(200, ok({logged: false}));
-      logged++;
-      logger.warn(
-        'Color picker field',
-        JSON.stringify({contentKey: body.params?.contentKey ?? null, settings: body.params?.settings ?? null}),
-      );
-      return new App.Response(200, ok({logged: true}));
+      const body = (this.request.bodyJSON ?? {}) as {action?: unknown};
+      if (body.action !== 'palette') return new App.Response(400, fail('unknown_action'));
+      return new App.Response(200, ok({swatches: await loadPalette()}));
     } catch (error) {
       logger.error('CmsUiExtension failure', error);
-      return new App.Response(500, {ok: false, error: 'internal_error'});
+      return new App.Response(500, fail('internal_error'));
     }
   }
 }
