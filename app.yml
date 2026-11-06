@@ -1,7 +1,7 @@
 meta:
   app_id: cms_color_picker
   display_name: Color picker
-  version: 0.0.1-dev.0
+  version: 0.0.1-dev.1
   vendor: optimizely
   summary: A color swatch beside long-string fields that writes a #rrggbb value (probe).
   support_url: https://www.optimizely.com
