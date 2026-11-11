@@ -18,10 +18,10 @@ describe('normalizeHex', () => {
 
 describe('parsePalette', () => {
   it('reads named and unnamed entries, comma or newline separated', () => {
-    expect(parsePalette('Lime #ABFF44, Mosey green #197050\n#fff')).toEqual({
+    expect(parsePalette('Lime #ABFF44, Forest green #197050\n#fff')).toEqual({
       swatches: [
         {name: 'Lime', hex: '#abff44'},
-        {name: 'Mosey green', hex: '#197050'},
+        {name: 'Forest green', hex: '#197050'},
         {name: '#ffffff', hex: '#ffffff'},
       ],
       invalid: [],

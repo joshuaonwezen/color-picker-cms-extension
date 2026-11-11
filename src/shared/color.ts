@@ -4,7 +4,7 @@ export interface Swatch {
   hex: string;
 }
 
-/** Mosey Bank's brand colors (optimizely-nextjs-demo globals.css, light theme). Used until a palette is saved. */
+/** The built-in sample palette. Used until a palette is saved. */
 export const DEFAULT_PALETTE: Swatch[] = [
   {name: 'Lime', hex: '#abff44'},
   {name: 'Fresh green', hex: '#7ddd3d'},
