@@ -57,7 +57,7 @@ export class Lifecycle extends AppLifecycle {
       }
       const next: PaletteSettings = {colors: swatches.map((s) => (s.name === s.hex ? s.hex : `${s.name} ${s.hex}`)).join(', ')};
       await storage.settings.put('palette', {...next});
-      return result.addToast('success', colors ? `Palette saved: ${swatches.length} colors.` : 'Palette cleared: editors get the brand colors.');
+      return result.addToast('success', colors ? `Palette saved: ${swatches.length} colors.` : 'Palette cleared: editors get the sample palette.');
     } catch (error) {
       logger.error('Settings save failed', error);
       return result.addToast('danger', 'Could not save the palette. Try again.');

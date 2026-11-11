@@ -7,8 +7,8 @@ sections:
         label: Colors
         help: >-
           The swatches editors can pick from, comma-separated, each an optional name and a hex
-          color: "Lime #abff44, Mosey green #197050, #ffffff". Leave blank for the Mosey Bank
-          brand colors. Editors can still pick any other color.
+          color: "Lime #abff44, Forest green #197050, #ffffff". Leave blank for a sample
+          palette. Editors can still pick any other color.
       - type: button
         label: Save
         action: savePalette

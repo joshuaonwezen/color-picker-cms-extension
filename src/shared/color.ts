@@ -8,7 +8,7 @@ export interface Swatch {
 export const DEFAULT_PALETTE: Swatch[] = [
   {name: 'Lime', hex: '#abff44'},
   {name: 'Fresh green', hex: '#7ddd3d'},
-  {name: 'Mosey green', hex: '#197050'},
+  {name: 'Forest green', hex: '#197050'},
   {name: 'Deep green', hex: '#0d3a29'},
   {name: 'Ink', hex: '#08251a'},
   {name: 'Teal', hex: '#007b79'},
